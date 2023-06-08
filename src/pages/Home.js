@@ -226,7 +226,21 @@ const Home = () => {
         </div>
       </div>
       <div className="bg-[#305366D6] p-10 grid grid-cols-4 text-white">
-        <div></div>
+        <div className="flex flex-col space-y-3">
+          <Link to="/">
+            <img
+              src="/images/logoslvgalleria.png"
+              alt="Logo"
+              className="w-20"
+            />
+          </Link>
+          <p>
+            Welcome to our Platform, where craftsmen can feature and offer their
+            unprecedented compositions to an overall crowd. We give a dynamic
+            and easy to understand online......
+          </p>
+          <Link className="border py-2 w-1/2 text-center">Know More</Link>
+        </div>
         <div className="flex flex-col items-center space-y-3">
           <h3 className="text-2xl">Quick Links</h3>
           <Link className="font-normal" to="/">
