@@ -5,8 +5,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 const Navbar = () => {
   return (
     <div
-      style={{ boxShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
-      className="text-[#333333] bg-white leading-6 justify-between flex items-center py-3 ps-5 pe-10"
+      className="text-[#333333] bg-[#f8f6f3] leading-6 justify-between flex items-center py-3 ps-5 pe-10"
     >
       <Link to="/">
         <img src="/images/logoslvgalleria.png" alt="Logo" className="w-28" />
