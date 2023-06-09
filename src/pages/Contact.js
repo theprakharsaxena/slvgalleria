@@ -1,6 +1,7 @@
 import React from "react";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { CiMail } from "react-icons/ci";
+import Dropdown from "../components/Dropdown";
 
 const Contact = () => {
   return (
@@ -27,12 +28,31 @@ const Contact = () => {
         <h1 className="text-3xl">Frequently Asked Questions!</h1>
         <h4 className="text-sm">General asked quires about our Platform</h4>
       </div>
-      <div className="grid grid-cols-2 gap-10 px-20 mb-20">
-        <h3>How can I sell my paintings on your platform?</h3>
-        <h3>How do I receive payment for my sold paintings?</h3>
-        <h3>What are the requirements for joining as an artist?</h3>
-        <h3>How do you ensure the safety of my artwork during shipping?</h3>
-        <h3>How do you ensure the safety of my artwork during shipping?</h3>
+      <div className="grid grid-cols-2 gap-20 px-32 mb-20">
+        <div className="flex flex-col space-y-6">
+          <Dropdown
+            title="How can I sell my paintings on your platform?"
+            description="Answer to question 1 goes here."
+          />
+          <Dropdown
+            title="What are the requirements for joining as an artist?"
+            description="Answer to question 1 goes here."
+          />
+          <Dropdown
+            title="How do you ensure the safety of my artwork during shipping?"
+            description="Answer to question 1 goes here."
+          />
+        </div>
+        <div className="flex flex-col space-y-6">
+          <Dropdown
+            title="How do I receive payment for my sold paintings?"
+            description="Answer to question 2 goes here."
+          />
+          <Dropdown
+            title="How do you ensure the safety of my artwork during shipping?"
+            description="Answer to question 2 goes here."
+          />
+        </div>
       </div>
     </>
   );
