@@ -11,7 +11,7 @@ const Home = () => {
         <img
           key={i}
           src="/images/star.png"
-          alt={`Image ${i}`}
+          alt={`Star ${i}`}
           className="w-6"
         />
       );
