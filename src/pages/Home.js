@@ -8,12 +8,7 @@ const Home = () => {
 
     for (let i = 0; i < repeatCount; i++) {
       images.push(
-        <img
-          key={i}
-          src="/images/star.png"
-          alt={`Star ${i}`}
-          className="w-6"
-        />
+        <img key={i} src="/images/star.png" alt={`Star ${i}`} className="w-6" />
       );
     }
 
@@ -21,6 +16,19 @@ const Home = () => {
   };
   return (
     <>
+      <div className={`flex items-center justify-center h-screen bg-fixed bg-center bg-cover page1`}>
+        <div className="p-5 text-white z-[2] mt-[-5rem]">
+          <h2 className="xl:text-7xl lg:text-6xl md:text-5xl text-4xl font-bold">
+            {"heading"}
+          </h2>
+          <p className="py-5 text-xl mb-1 font-mono">{"message"}</p>
+          <Link
+            href={`/${"link"}`}
+            className="px-8 py-2 border hover:border-blue-500 hover:text-blue-500 cursor-pointer"
+          >page
+          </Link>
+        </div>
+      </div>
       <div className="bg-[#f8f6f3] px-20 py-20 grid grid-cols-2 gap-20 justify-center items-center">
         <div>
           <img src="/images/product1.png" alt="Product1" />
