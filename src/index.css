@@ -7,3 +7,7 @@
 .Merriweather {
   font-family: "Merriweather", serif;
 }
+
+.page1{
+  background-image:url(/public/images/page1.jpg);
+}
