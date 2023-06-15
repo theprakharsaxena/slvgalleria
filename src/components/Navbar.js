@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { HiShoppingBag } from "react-icons/hi";
+import { FaUserAlt } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 
 const NavbarData = [
@@ -13,28 +15,19 @@ const NavbarData = [
   },
   {
     link: "/services",
-    title: "Courses",
+    title: "Services",
   },
   {
     link: "/Contact",
     title: "Contact Us",
   },
-  {
-    link: "/cart",
-    title: "Cart",
-  },
-  {
-    link: "/loginsignup",
-    title: "Login/Sign Up",
-  },
 ];
 
 const Navbar = () => {
-  // const [active, setActive] = useState("Home")
   const [nav, setNav] = useState(false);
   const [color, setcolor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
-  const [image, setImage] = useState("/logo1b.png");
+  const [image, setImage] = useState("/images/logoslvgalleria.png");
 
   const handleNav = () => {
     setNav(!nav);
@@ -45,11 +38,11 @@ const Navbar = () => {
       if (window.scrollY >= 90) {
         setcolor("#ffffff");
         setTextColor("#000000");
-        setImage("/logo2b.png");
+        setImage("/images/logoslvgalleria.png");
       } else {
         setcolor("transparent");
         setTextColor("#ffffff");
-        setImage("/logo1b.png");
+        setImage("/images/logoslvgalleria.png");
       }
     };
     window.addEventListener("scroll", changeColor);
@@ -58,16 +51,19 @@ const Navbar = () => {
   return (
     <>
       <div
-        style={{ backgroundColor: `${color}` }}
+        style={{
+          backgroundColor: `${color}`,
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.3)",
+        }}
         className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
       >
-        <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white">
-          <Link href="/">
+        <div className="max-w-[1280px] m-auto flex justify-between items-center p-4 text-white">
+          <Link to="/">
             <img
               src={image}
               width={60}
               height={60}
-              alt="Developer Abode Logo"
+              alt="SLV Galleria Logo"
             />
           </Link>
           <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
@@ -75,21 +71,32 @@ const Navbar = () => {
               return (
                 <li
                   key={id}
-                  className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-blue-500"
+                  className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500"
                 >
-                  <Link href={link}>{title}</Link>
+                  <Link to={link}>{title}</Link>
                 </li>
               );
             })}
+            <li className="m-4 font-mono hover:text-pink-500">
+              <Link to="/cart" className="flex items-center space-x-2">
+                <span>&#8377;0.00</span>
+                <HiShoppingBag className="text-xl" />
+              </Link>
+            </li>
+            <li className="m-[19px] font-mono hover:text-pink-500">
+              <Link to="/loginsignup">
+                <FaUserAlt className="" />
+              </Link>
+            </li>
           </ul>
 
           {/* Mobile Button */}
           <div
             onClick={handleNav}
-            className="block sm:hidden z-10 cursor-pointer hover:text-blue-500 mr-1"
+            className="block sm:hidden z-10 cursor-pointer hover:text-pink-500 mr-1"
           >
             {nav ? (
-              <AiOutlineClose size={20} className="hover:text-blue-500" />
+              <AiOutlineClose size={20} className="hover:text-pink-500" />
             ) : (
               <AiOutlineMenu size={20} style={{ color: `${textColor}` }} />
             )}
@@ -102,23 +109,34 @@ const Navbar = () => {
                 : "sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-300"
             }
           >
-            <ul>
+            <ul className="flex flex-col items-center">
               {NavbarData.map(({ link, title }, id) => {
                 return (
                   <li
                     key={id}
-                    className="p-4 text-4xl hover:underline hover:underline-offset-8 font-mono hover:text-blue-500"
+                    className="m-4 text-4xl hover:underline hover:underline-offset-8 font-mono hover:text-pink-500"
                   >
-                    <Link href={link} onClick={handleNav}>
+                    <Link to={link} onClick={handleNav}>
                       {title}
                     </Link>
                   </li>
                 );
               })}
+              <li className="m-4 text-4xl font-mono hover:text-pink-500">
+                <Link to="/cart" className="flex items-center space-x-2">
+                  <span>&#8377;0.00</span>
+                  <HiShoppingBag />
+                </Link>
+              </li>
+              <li className="m-4 text-4xl font-mono hover:text-pink-500">
+                <Link to="/loginsignup">
+                  <FaUserAlt />
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
-        <p style={{ backgroundColor: `${textColor}` }} className="h-0.5"></p>
+        {/* <p style={{ backgroundColor: `${scrollColor}` }} className="h-0.5"></p> */}
       </div>
     </>
   );

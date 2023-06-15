@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const LoginSignUp = () => {
   return (
-    <div>LoginSignUp</div>
-  )
-}
+    <>
+       <div className="p-11 bg-black"></div>
+    </>
+  );
+};
 
-export default LoginSignUp
+export default LoginSignUp;

@@ -6,10 +6,11 @@ import Dropdown from "../components/Dropdown";
 const Contact = () => {
   return (
     <>
+       <div className="p-11 bg-black"></div>
       <h1 className="flex justify-center text-4xl py-20 bg-[#D9D9D97A]">
         Get In Touch
       </h1>
-      <div className="bg-[#305366] py-10 px-20 gap-20 grid grid-cols-3">
+      <div className="bg-pink-900 py-10 px-20 gap-20 grid grid-cols-3">
         <div className="bg-white flex flex-col justify-center items-center py-8">
           <IoCallOutline className="text-red-400 text-2xl mb-4" />
           <h5>+91 98977 01719</h5>

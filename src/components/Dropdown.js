@@ -9,7 +9,7 @@ const Dropdown = ({ title, description }) => {
   };
 
   return (
-    <div className=" border-b-2 border-gray-300">
+    <div className="border-b-2 border-pink-900">
       <div
         className="flex justify-between items-center py-4 cursor-pointer"
         onClick={toggleDropdown}
@@ -20,11 +20,11 @@ const Dropdown = ({ title, description }) => {
             isOpen ? "transform rotate-50" : "transform rotate-0"
           }`}
         >
-          {isOpen ? <BiUpArrow /> : <BiRightArrow />}
+          {isOpen ? <BiUpArrow className="text-pink-900"/> : <BiRightArrow className="text-pink-900"/>}
         </span>
       </div>
       {isOpen && (
-        <div className="faq-dropdown__description">
+        <div className="faq-dropdown__description mb-3">
           <p>{description}</p>
         </div>
       )}
