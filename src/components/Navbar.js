@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose, AiFillShop } from "react-icons/ai";
 import { HiShoppingBag } from "react-icons/hi";
 import { FaUserAlt } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
+import LoginUser from "./LoginUser";
 
 const NavbarData = [
   {
@@ -25,7 +26,7 @@ const NavbarData = [
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [color, setcolor] = useState("transparent");
+  const [color, setcolor] = useState("#000000");
   const [textColor, setTextColor] = useState("white");
   const [image, setImage] = useState("/images/logoslvgalleria.png");
 
@@ -40,7 +41,7 @@ const Navbar = () => {
         setTextColor("#000000");
         setImage("/images/logoslvgalleria.png");
       } else {
-        setcolor("transparent");
+        setcolor("#000000");
         setTextColor("#ffffff");
         setImage("/images/logoslvgalleria.png");
       }
@@ -59,14 +60,12 @@ const Navbar = () => {
       >
         <div className="max-w-[1280px] m-auto flex justify-between items-center p-4 text-white">
           <Link to="/">
-            <img
-              src={image}
-              width={60}
-              height={60}
-              alt="SLV Galleria Logo"
-            />
+            <img src={image} width={60} height={60} alt="SLV Galleria Logo" />
           </Link>
-          <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
+          <ul
+            style={{ color: `${textColor}` }}
+            className="hidden sm:flex items-center"
+          >
             {NavbarData.map(({ link, title }, id) => {
               return (
                 <li
@@ -83,10 +82,16 @@ const Navbar = () => {
                 <HiShoppingBag className="text-xl" />
               </Link>
             </li>
-            <li className="m-[19px] font-mono hover:text-pink-500">
+            {/* <li className="m-4 font-mono hover:text-pink-500">
               <Link to="/loginsignup">
-                <FaUserAlt className="" />
+                <AiFillShop className="" />
               </Link>
+            </li> */}
+            <li className="m-4 font-mono hover:text-pink-500">
+              {/* <Link to="/loginsignup"> */}
+              {/* <FaUserAlt className="" /> */}
+              <LoginUser textColor={textColor} />
+              {/* </Link> */}
             </li>
           </ul>
 

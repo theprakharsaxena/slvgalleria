@@ -20,8 +20,8 @@ const About = () => {
       <h1 className="flex justify-center text-5xl py-20 bg-[#D9D9D97A]">
         About Us
       </h1>
-      <section className="grid grid-cols-2 px-32 py-20 gap-20">
-        <div className="flex flex-col space-y-5">
+      <section className="grid grid-cols-1 md:grid-cols-2 gri px-[10%] py-20 md:gap-20 gap-10">
+        <div className="flex flex-col space-y-5 md:order-none order-1">
           <h3 className="text-4xl text-pink-900 font-serif">
             We are your favourite Store
           </h3>
@@ -40,7 +40,7 @@ const About = () => {
           <img src="/images/painting5.jpg" alt="Painting 5" />
         </div>
       </section>
-      <section className="bg-pink-900 text-white px-20 py-10 grid grid-cols-4 gap-20">
+      <section className="bg-pink-900 text-white px-20 py-10 grid grid-cols-2 sm:grid-cols-4 gap-20">
         <h5 className="text-lg">Number Speaks For Themselves! </h5>
         <div className="flex flex-col">
           <h4 className="text-xl">10000+</h4>
@@ -55,14 +55,14 @@ const About = () => {
           <p className="text-sm">Artists</p>
         </div>
       </section>
-      <section className="grid grid-cols-2 px-20 py-20 gap-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 px-20 py-20 gap-20">
         <div className="flex flex-col justify-center items-center relative">
           <img
             src="/images/painting6.jpg"
             alt="Painting 6"
-            className="absolute top-0 h-64"
+            className="absolute top-0 h-64 w-"
           />
-          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-32 rounded-3xl w-[58%] mt-28">
+          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-32 rounded-3xl w-full sm:w-4/6 md:w-full lg:w-[58%] mt-28">
             <div className="flex space-x-1 mt-32">{renderImages(5)}</div>
             <h4 className="text-xl font-serif">Prakhar Saxena</h4>
           </div>
@@ -71,7 +71,7 @@ const About = () => {
           <h2 className="text-4xl font-serif">
             We deal with Various quality Arts & Designs
           </h2>
-          <div className="grid grid-cols-3 mt-10 gap-4 font-serif">
+          <div className="grid grid-cols-1 lg:grid-cols-3 mt-10 gap-4 font-serif">
             <div className="flex flex-col space-y-5">
               <div className="flex items-center space-x-2">
                 <LuVerified className="text-pink-500 text-2xl" />
@@ -90,7 +90,7 @@ const About = () => {
                 <h5 className="text-lg"> Conceptual Depth</h5>
               </div>
             </div>
-            <div className="col-span-2 flex flex-col space-y-5">
+            <div className="lg:col-span-2 flex flex-col space-y-5">
               <div className="flex items-center space-x-2">
                 <LuVerified className="text-pink-500 text-2xl" />
                 <h5 className="text-lg">Emotional Resonance</h5>

@@ -1,9 +1,9 @@
 import React from "react";
 import { HiShoppingCart } from "react-icons/hi";
 import { AiFillStar } from "react-icons/ai";
-import { BiMessageDetail,BiCategory } from "react-icons/bi";
-import { MdOutlineLocalShipping,MdOutlineSavings } from "react-icons/md";
-import { TbCertificate,TbTruckReturn } from "react-icons/tb";
+import { BiMessageDetail, BiCategory } from "react-icons/bi";
+import { MdOutlineLocalShipping, MdOutlineSavings } from "react-icons/md";
+import { TbCertificate, TbTruckReturn } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const data = [
@@ -130,11 +130,15 @@ const Home = () => {
           <h4>Shop Now</h4>
         </Link>
       </section>
-      <section className="bg-gray-50 my-[6%] grid grid-cols-2 gap-20 justify-center items-center">
+      <section className="bg-gray-50 my-[6%] grid md:grid-cols-2 grid-cols-1 md:gap-20 justify-center items-center">
         <div>
-          <img src="/images/join.jpg" alt="Product1" />
+          <img
+            src="/images/join.jpg"
+            alt="Product1"
+            className="p-[10%] md:p-0"
+          />
         </div>
-        <div className="w-[86%]">
+        <div className="w-[86%] p-[10%]">
           <h5 className="merriweather">Best Quality Designs</h5>
           <h1 className="merriweather text-5xl text-pink-950 leading-normal mt-3 mb-6">
             Join the new Era of Art & Designing.
@@ -152,20 +156,14 @@ const Home = () => {
         </div>
       </section>
       <section className="mt-28">
-        {/* <div className="flex flex-col items-center space-y-3 relative">
-          <h2 className="text-3xl mb-3 absolute top-[-90px]">Top Categories</h2>
-          <img
-            src="/images/categories1.png"
-            alt="Categories"
-            className="w-16 absolute top-[-43px]"
-          />
-        </div> */}
         <div className="flex flex-col items-center justify-center text-5xl mb-14">
-          <h2 className="text-6xl mb-3 font-serif text-pink-900">Top Categories</h2>
-          <BiCategory className="text-4xl"/>
+          <h2 className="text-6xl mb-3 font-serif text-pink-900">
+            Top Categories
+          </h2>
+          <BiCategory className="text-4xl" />
         </div>
-        <div className="bg-pink-900 px-28 py-20 grid grid-cols-1 gap-16 justify-center items-center">
-          <div className="grid grid-cols-3 gap-20">
+        <div className="bg-pink-900 lg:px-[10%] lg:py-[6%] px-[14%] py-[14%] grid grid-cols-1 gap-16 justify-center items-center">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-20">
             <div className="bg-white p-10 flex flex-col justify-between items-center space-y-64">
               <h3 className="text-4xl font-serif">Handmade</h3>
               <Link
@@ -203,22 +201,22 @@ const Home = () => {
           </h2>
           <BiMessageDetail className="text-4xl" />
         </div>
-        <div className="flex justify-center space-x-20">
-          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl min-w-[33%] mt-16">
+        <div className="flex justify-center flex-col space-y-16 lg:flex-row lg:space-x-20 w-4/6">
+          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl lg:min-w-[33%] lg:mt-16">
             <div className="flex space-x-1">{renderImages(4)}</div>
             <h4 className="text-xl">Prakhar Saxena</h4>
           </div>
-          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl min-w-[33%] mb-16">
+          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl lg:min-w-[33%] lg:mb-16">
             <div className="flex space-x-1">{renderImages(5)}</div>
             <h4 className="text-xl">Ankit Yadav</h4>
           </div>
-          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl min-w-[33%] mt-16">
+          <div className="bg-gray-200 p-10 flex flex-col justify-between items-center space-y-40 rounded-3xl lg:min-w-[33%] lg:mt-16">
             <div className="flex space-x-1">{renderImages(4)}</div>
             <h4 className="text-xl">Prakhar Saxena</h4>
           </div>
         </div>
       </section>
-      <section className="bg-gray-50 px-12 py-16 grid grid-cols-4 gap-12">
+      <section className="bg-gray-50 px-[20%] sm:px-12 py-16 flex flex-col items-start sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         <div className="flex items-center justify-center space-x-4">
           <MdOutlineLocalShipping className="text-5xl text-white bg-pink-500 p-2.5 rounded-full" />
           <div className="font-serif">

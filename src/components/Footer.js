@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <section className="bg-pink-900 p-10 grid grid-cols-4 text-white">
+    <section className="bg-pink-900 p-10 sm:grid-cols-2 grid lg:grid-cols-4 grid-cols-1 gap-10 text-white">
       <div className="flex flex-col space-y-3">
         <Link to="/">
           <img src="/images/whitelogoslvgalleria.png" alt="Logo" className="w-20" />
