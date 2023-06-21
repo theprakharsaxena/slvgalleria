@@ -6,7 +6,7 @@ const LoginSignUp = () => {
   return (
     <>
       <section className="h-screen grid md:grid-cols-2 grid-cols-1">
-        <div className="bg-gray-100 flex justify-start items-center px-[10%] pt-[13%]">
+        <div className="bg-white flex justify-start items-center px-[10%] pt-[13%]">
           <div className="flex flex-col w-full space-y-5">
             <h3 className="text-3xl font-semibold pb-[3%]">Welcome Back</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 w-full">
@@ -58,7 +58,7 @@ const LoginSignUp = () => {
             </div>
           </div>
         </div>
-        <div className="bg-pink-600 hidden md:flex justify-center items-center">
+        <div className="bg-pink-600 hidden md:flex justify-center items-center pt-[13%]">
           <img src="/images/loginphoto.png" className="" />
         </div>
       </section>

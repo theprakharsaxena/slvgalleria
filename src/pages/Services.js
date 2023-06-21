@@ -1,9 +1,15 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Services = () => {
   return (
     <>
-       <div className="p-11 bg-black"></div>
+      <Helmet>
+        <title>Services - SLV Galleria</title>
+      </Helmet>
+      <div>
+        <div className="p-11 bg-black"></div>
+      </div>
     </>
   );
 };
