@@ -2,7 +2,6 @@ import React from "react";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { CiMail } from "react-icons/ci";
 import Dropdown from "../components/Dropdown";
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const Contact = () => {

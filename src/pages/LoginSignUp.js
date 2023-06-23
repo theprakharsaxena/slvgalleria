@@ -59,7 +59,7 @@ const LoginSignUp = () => {
           </div>
         </div>
         <div className="bg-pink-600 hidden md:flex justify-center items-center pt-[13%]">
-          <img src="/images/loginphoto.png" className="" />
+          <img src="/images/loginphoto.png" className="" alt="Login Photo"/>
         </div>
       </section>
       {/* <section className="h-screen px-[6%] bg-red-300">

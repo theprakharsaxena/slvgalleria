@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { BiCartAdd } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
