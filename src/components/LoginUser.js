@@ -1,30 +1,52 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { BsChevronDown } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { HiChevronDown } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../redux/slice/userSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function LoginUser(textColor) {
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  if (isLoading) {
-    return <div>...</div>;
+export default function LoginUser() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const user = useSelector((state) => state.user.value);
+  console.log("USER", user?._id);
+  const uid = user?._id;
+  const userName = user?.name;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (uid) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [uid]);
+
+  function handleremoveUser() {
+    dispatch(removeUser());
+    navigate("/");
   }
-  console.log("USER", user);
+
   return (
     <Menu as="div" className="relative inline-block">
       <div>
-        <Menu.Button className="text-white">
+        <Menu.Button>
           {!isAuthenticated ? (
-            <FaUserAlt style={{ color: `${textColor}` }}/>
+            <Link to="/log-in" className="px-10 py-1 bg-pink-900">
+              Login
+            </Link>
           ) : (
-            <img src={user ? user.picture : ""} className="w-8 rounded-full border-2 border-black hover:border-pink-500"/>
+            <div className="flex space-x-1 py-1 items-center">
+              <h3 className="">{userName ? userName : ""}</h3>
+              <HiChevronDown className="text-xl " />
+            </div>
           )}
         </Menu.Button>
       </div>
@@ -43,81 +65,61 @@ export default function LoginUser(textColor) {
             {!isAuthenticated ? (
               <Menu.Item>
                 {({ active }) => (
-                  // <Link
-                  //   to="/log-in"
-                  //   className={classNames(
-                  //     active ? 'bg-white text-black' : '',
-                  //     'block px-4 py-2 text-sm'
-                  //   )}
-                  // >
-                  //   Log In
-                  // </Link>
-
                   <button
                     className={classNames(
                       active ? "text-black" : "",
-                      "block px-4 py-2 text-sm w-full"
+                      "flex px-4 py-2 text-sm w-full"
                     )}
-                    onClick={() => loginWithRedirect()}
                   >
                     Log In
                   </button>
                 )}
               </Menu.Item>
             ) : (
-              <Menu.Item>
-                {({ active }) => (
-                  // <Link
-                  //   to="/sign-up"
-                  //   className={classNames(
-                  //     active ? "bg-white text-black" : "",
-                  //     "block px-4 py-2 text-sm"
-                  //   )}
-                  // >
-                  //   Sign Up
-                  // </Link>
-                  <button
-                    className={classNames(
-                      active ? "text-black" : "",
-                      "block px-4 py-2 text-sm"
-                    )}
-                    onClick={() =>
-                      logout({
-                        logoutParams: { returnTo: window.location.origin },
-                      })
-                    }
-                  >
-                    Log Out
-                  </button>
-                )}
-              </Menu.Item>
-            )}
-            <Menu.Item>
-              {({ active }) => (
-                // <Link
-                //   to="/sign-up"
-                //   className={classNames(
-                //     active ? "bg-white text-black" : "",
-                //     "block px-4 py-2 text-sm"
-                //   )}
-                // >
-                //   Sign Up
-                // </Link>
-                <button
-                  className={classNames(
-                    active ? "text-black" : "",
-                    "block px-4 py-2 text-sm"
+              <>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      className={classNames(
+                        active ? "text-black" : "",
+                        "block px-4 py-2 text-sm"
+                      )}
+                      to="/profile"
+                    >
+                      My Profile
+                    </Link>
                   )}
-                  onClick={() =>
-                    logout({
-                      logoutParams: { returnTo: window.location.origin },
-                    })
-                  }
-                >
-                  Become a Seller
-                </button>
-              )}
-            </Menu.Item>
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link
+                      className={classNames(
+                        active ? "text-black" : "",
+                        "block px-4 py-2 text-sm"
+                      )}
+                      to="/orders"
+                    >
+                      Orders
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={classNames(
+                        active ? "text-black" : "",
+                        "flex px-4 py-2 text-sm w-full"
+                      )}
+                      onClick={() => {
+                        handleremoveUser();
+                      }}
+                    >
+                      Log Out
+                    </button>
+                  )}
+                </Menu.Item>
+              </>
+            )}
           </div>
         </Menu.Items>
       </Transition>

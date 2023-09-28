@@ -28,7 +28,7 @@ const About = () => {
         />
       </Helmet>
       <div>
-        <div className="p-11 bg-black"></div>
+        <div className="p-9 bg-black"></div>
         <h1 className="flex justify-center text-5xl py-20 bg-[#D9D9D97A]">
           About Us
         </h1>

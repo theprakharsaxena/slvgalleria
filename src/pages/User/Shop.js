@@ -65,7 +65,7 @@ const Shop = () => {
         />
       </Helmet>
       <div>
-        <div className="p-11 bg-black"></div>
+        <div className="p-9 bg-black"></div>
         <section className="py-3 px-[1%] bg-gray-200">
           {/* <div className="flex justify-between items-center mb-[3%]">
             <h2 className="text-4xl font-serif">New Designs</h2>

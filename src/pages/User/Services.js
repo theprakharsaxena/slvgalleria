@@ -8,7 +8,7 @@ const Services = () => {
         <title>Services - SLV Galleria</title>
       </Helmet>
       <div>
-        <div className="p-11 bg-black"></div>
+        <div className="p-9 bg-black"></div>
       </div>
     </>
   );

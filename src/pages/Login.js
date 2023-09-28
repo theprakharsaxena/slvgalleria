@@ -1,15 +1,114 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle, FcShop } from "react-icons/fc";
+import { useDispatch } from "react-redux";
+import loginapi from "../services/authentication/loginapi";
+import toast from "react-hot-toast";
+import { addUser } from "../redux/slice/userSlice";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import forgetPassword from "../services/authentication/forgetPassword";
 
-const LoginSignUp = () => {
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const [forget, setForget] = useState({
+    email: "",
+    sports: "",
+    newPassword: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChangeForget = (e) => {
+    setForget((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmitForget = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await forgetPassword({
+        email: forget.email,
+        sports: forget.sports,
+        newPassword: forget.newPassword,
+      });
+      console.log("Data", data);
+      toast.success(data?.message);
+      if (data?.success) {
+        setLoading(false);
+        dispatch(addUser(data?.user));
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Invalid email and password!");
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  //form handle
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await loginapi({
+        email: inputs.email,
+        password: inputs.password,
+      });
+      toast.success(data?.message);
+      if (data?.success) {
+        setLoading(false);
+        dispatch(addUser(data?.user));
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Invalid email and password!");
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <>
+      <div className="p-9 bg-black"></div>
       <section className="h-screen grid md:grid-cols-2 grid-cols-1">
-        <div className="bg-white flex justify-start items-center px-[10%] pt-[13%]">
-          <div className="flex flex-col w-full space-y-5">
+        <div className="bg-white flex justify-start items-center px-[10%]">
+          <form
+            onSubmit={(e) => {
+              setLoading(true);
+              handleSubmit(e);
+            }}
+            className="flex flex-col w-full space-y-5"
+          >
             <h3 className="text-3xl font-semibold pb-[3%]">Welcome Back</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 w-full">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 w-full">
               <div className="flex items-center justify-center rounded-md space-x-2 w-full py-2 bg-pink-900 text-white">
                 <FcGoogle className="text-xl" />
                 <h5>Continue with Google</h5>
@@ -18,16 +117,20 @@ const LoginSignUp = () => {
                 <FcShop className="text-xl" />
                 <h5>Become a Seller</h5>
               </div>
-            </div>
-            <div className="flex space-x-3 items-center">
+            </div> */}
+            {/* <div className="flex space-x-3 items-center">
               <div className="p-[1px] bg-pink-600 w-[47%]"></div>
               <h5 className="w-[6%] text-center">or</h5>
               <div className="p-[1px] bg-pink-600 w-[47%]"></div>
-            </div>
+            </div> */}
             <div className="flex flex-col space-y-5">
               <div className="flex flex-col space-y-1">
                 <label>Email</label>
                 <input
+                  required
+                  name="email"
+                  value={inputs.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
                   className="flex p-2 rounded-md w-full bg-pink-200 text-pink-900 placeholder:text-pink-900"
                 />
@@ -35,6 +138,10 @@ const LoginSignUp = () => {
               <div className="flex flex-col space-y-1">
                 <label>Password</label>
                 <input
+                  required
+                  name="password"
+                  value={inputs.password}
+                  onChange={handleChange}
                   placeholder="Password"
                   className="flex p-2 rounded-md w-full bg-pink-200 text-pink-900 placeholder:text-pink-900"
                 />
@@ -45,23 +152,83 @@ const LoginSignUp = () => {
                 <input type="checkbox" />
                 <h5>Remember me</h5>
               </div>
-              <Link className="text-pink-600 hover:underline">
+              <button
+                onClick={handleClickOpen}
+                className="text-pink-600 hover:underline"
+              >
                 Forgot Password?
-              </Link>
+              </button>
             </div>
-            <button className="p-2 m-1 bg-pink-600 text-white rounded-lg">
+            <button
+              type="submit"
+              className="p-2 m-1 bg-pink-600 text-white rounded-lg"
+            >
               Sign in to your account
             </button>
             <div className="flex space-x-2">
               <h5>Don't have an account?</h5>
-              <Link className="text-pink-600 hover:underline">Sign up</Link>
+              <Link to="/sign-up" className="text-pink-600 hover:underline">
+                Sign up
+              </Link>
             </div>
-          </div>
+          </form>
         </div>
-        <div className="bg-pink-600 hidden md:flex justify-center items-center pt-[13%]">
-          <img src="/images/loginphoto.png" className="" alt="Login Photo"/>
+        <div className="bg-pink-600 hidden md:flex justify-center items-center">
+          <img src="/images/loginphoto.png" className="" alt="Login Photo" />
         </div>
       </section>
+      <Dialog open={open} onClose={handleClose}>
+        <form
+          onSubmit={(e) => {
+            setLoading(true);
+            handleSubmitForget(e);
+          }}
+        >
+          <DialogTitle>Forgot Password</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              name="email"
+              value={forget.email}
+              onChange={handleChangeForget}
+              label="Email"
+              placeholder="Enter your Email"
+              type="email"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="sports"
+              name="sports"
+              value={forget.sports}
+              onChange={handleChangeForget}
+              label="Answer"
+              placeholder="Enter your Favorite Sports"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              id="newPassword"
+              name="newPassword"
+              value={forget.newPassword}
+              onChange={handleChangeForget}
+              label="New Password"
+              placeholder="Enter New Password"
+              type="password"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <button onClick={handleClose}>Cancel</button>
+            <button type="submit" color="primary">
+              Save
+            </button>
+          </DialogActions>
+        </form>
+      </Dialog>
       {/* <section className="h-screen px-[6%] bg-red-300">
         <div className="h-full mt-[3%] mb-[-3%]">
           <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
@@ -211,4 +378,4 @@ const LoginSignUp = () => {
   );
 };
 
-export default LoginSignUp;
+export default Login;

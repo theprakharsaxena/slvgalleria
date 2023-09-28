@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Quantity from "../components/Quantity";
+import Quantity from "../../components/Quantity";
 import { Helmet } from "react-helmet";
 
 const data = [
@@ -41,7 +41,7 @@ const Cart = () => {
         />
       </Helmet>
       <div>
-        <div className="p-11"></div>
+      <div className="p-9 bg-black"></div>
         <section className="grid grid-cols-1 lg:grid-cols-3 my-12 px-[4%] gap-8">
           <div className="lg:col-span-2 bg-gray-50 p-4 border border-gray-500 border-dotted">
             <h2 className="text-xl font-mono">Shopping Cart</h2>

@@ -1,7 +1,7 @@
 import React from "react";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { CiMail } from "react-icons/ci";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../../components/Dropdown";
 import { Helmet } from "react-helmet";
 
 const Contact = () => {
@@ -19,7 +19,7 @@ const Contact = () => {
         />
       </Helmet>
       <div>
-        <div className="p-11 bg-black"></div>
+        <div className="p-9 bg-black"></div>
         <h1 className="flex justify-center text-5xl py-20 bg-[#D9D9D97A]">
           Contact Us
         </h1>

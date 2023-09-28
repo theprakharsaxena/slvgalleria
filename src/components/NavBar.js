@@ -1,32 +1,26 @@
 import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose, AiFillShop } from "react-icons/ai";
 import { HiShoppingBag } from "react-icons/hi";
-import { FaUserAlt } from "react-icons/fa";
+import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import LoginUser from "./LoginUser";
+import { BsCart3 } from "react-icons/bs";
+import AboutUser from "./AboutUser";
 
-const NavbarData = [
+const NavBarData = [
   {
     link: "/",
     title: "Home",
   },
   {
-    link: "/about",
-    title: "About Us",
-  },
-  {
-    link: "/services",
-    title: "Services",
-  },
-  {
-    link: "/Contact",
-    title: "Contact Us",
+    link: "/shop",
+    title: "Shop",
   },
 ];
 
-const Navbar = () => {
+const NavBar = () => {
   const [nav, setNav] = useState(false);
-  const [color, setcolor] = useState("#000000");
+  const [color, setcolor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
   const [image, setImage] = useState("/images/logoslvgalleria.png");
 
@@ -37,11 +31,11 @@ const Navbar = () => {
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 90) {
-        setcolor("#ffffff");
-        setTextColor("#000000");
+        setcolor("#000000");
+        setTextColor("#ffffff");
         setImage("/images/logoslvgalleria.png");
       } else {
-        setcolor("#000000");
+        setcolor("transparent");
         setTextColor("#ffffff");
         setImage("/images/logoslvgalleria.png");
       }
@@ -58,7 +52,7 @@ const Navbar = () => {
         }}
         className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
       >
-        <div className="max-w-[1280px] m-auto flex justify-between items-center p-4 text-white">
+        <div className="max-w-[1280px] m-auto flex justify-between items-center py-1 px-4 md:px-0 text-white">
           <Link to="/">
             <img src={image} width={60} height={60} alt="SLV Galleria Logo" />
           </Link>
@@ -66,32 +60,23 @@ const Navbar = () => {
             style={{ color: `${textColor}` }}
             className="hidden sm:flex items-center"
           >
-            {NavbarData.map(({ link, title }, id) => {
-              return (
-                <li
-                  key={id}
-                  className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500"
-                >
-                  <Link to={link}>{title}</Link>
-                </li>
-              );
-            })}
+            <li className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500">
+              <Link to="shop">Shop</Link>
+            </li>
+            <li className="m-4 font-mono hover:text-pink-500">
+              <LoginUser />
+            </li>
+            <li className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500">
+              <Link to="/shop">Become a Seller</Link>
+            </li>
+            <li className="m-4 font-mono hover:text-pink-500">
+              <AboutUser />
+            </li>
             <li className="m-4 font-mono hover:text-pink-500">
               <Link to="/cart" className="flex items-center space-x-2">
                 <span>&#8377;0.00</span>
-                <HiShoppingBag className="text-xl" />
+                <BsCart3 className="text-xl" />
               </Link>
-            </li>
-            {/* <li className="m-4 font-mono hover:text-pink-500">
-              <Link to="/loginsignup">
-                <AiFillShop className="" />
-              </Link>
-            </li> */}
-            <li className="m-4 font-mono hover:text-pink-500">
-              {/* <Link to="/loginsignup"> */}
-              {/* <FaUserAlt className="" /> */}
-              <LoginUser textColor={textColor} />
-              {/* </Link> */}
             </li>
           </ul>
 
@@ -115,7 +100,7 @@ const Navbar = () => {
             }
           >
             <ul className="flex flex-col items-center">
-              {NavbarData.map(({ link, title }, id) => {
+              {NavBarData.map(({ link, title }, id) => {
                 return (
                   <li
                     key={id}
@@ -147,4 +132,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;
