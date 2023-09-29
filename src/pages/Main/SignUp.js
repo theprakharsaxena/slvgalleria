@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle, FcShop } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import signupapi from "../services/authentication/signupapi";
+import signupapi from "../../services/authentication/signupapi";
 import toast from "react-hot-toast";
-import { addUser } from "../redux/slice/userSlice";
+import { addUser } from "../../redux/slice/userSlice";
 
 const SignUp = () => {
   const navigate = useNavigate();

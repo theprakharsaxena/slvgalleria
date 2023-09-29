@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { AiFillHeart } from "react-icons/ai";
 import { BiCartAdd } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -51,6 +51,12 @@ const data = [
 ];
 
 const Shop = () => {
+  const navigate = useNavigate();
+
+  function goToProductPage(id) {
+    navigate(`/shop/${id}`);
+  }
+
   return (
     <>
       <Helmet>
@@ -122,11 +128,21 @@ const Shop = () => {
                   <div className="flex space-x-5">
                     <h4 className="font-bold">Sort By</h4>
                     <ul className="flex space-x-4">
-                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">Relevance</li>
-                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">Popularity</li>
-                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">Price -- Low to High</li>
-                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">Price -- High to Low</li>
-                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">Newest First</li>
+                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">
+                        Relevance
+                      </li>
+                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">
+                        Popularity
+                      </li>
+                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">
+                        Price -- Low to High
+                      </li>
+                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">
+                        Price -- High to Low
+                      </li>
+                      <li className="hover:underline underline-offset-8 hover:text-pink-900 cursor-pointer">
+                        Newest First
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -137,6 +153,7 @@ const Shop = () => {
                   ({ image, title, creator, featured, price }, index) => {
                     return (
                       <div
+                        onClick={() => goToProductPage(index)}
                         className="flex flex-col space-y-5 mb-10 p-1 hover:p-0 cursor-pointer"
                         key={index}
                       >

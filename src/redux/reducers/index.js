@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
 import userReducer from "../slice/userSlice";
-import blogReducer from "../slice/blogSlice";
+import cartReducer from "../slice/cartSlice";
+import shopFilterReducer from "../slice/shopFilterSlice";
+import adminReducer from "../slice/adminSlice";
 
 const rootReducer = combineReducers({
-  blog: blogReducer,
   user: userReducer,
+  admin: adminReducer,
+  cart: cartReducer,
+  shopFilter: shopFilterReducer,
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { HiChevronDown } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../redux/slice/userSlice";
+import { removeAdmin } from "../redux/slice/adminSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,15 +15,27 @@ function classNames(...classes) {
 
 export default function LoginUser() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const user = useSelector((state) => state.user.value);
+  const admin = useSelector((state) => state.admin.value);
   console.log("USER", user?._id);
   const uid = user?._id;
+  const adminUID = admin?._id;
   const userName = user?.name;
+  const adminName = admin?.name;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (uid) {
+    if (adminUID) {
+      setIsAdminLogin(true);
+    } else {
+      setIsAdminLogin(false);
+    }
+  }, [adminUID]);
+
+  useEffect(() => {
+    if (uid || adminUID) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
@@ -31,6 +44,7 @@ export default function LoginUser() {
 
   function handleremoveUser() {
     dispatch(removeUser());
+    dispatch(removeAdmin());
     navigate("/");
   }
 
@@ -44,7 +58,15 @@ export default function LoginUser() {
             </Link>
           ) : (
             <div className="flex space-x-1 py-1 items-center">
-              <h3 className="">{userName ? userName : ""}</h3>
+              <h3 className="">
+                {!isAdminLogin
+                  ? userName
+                    ? userName
+                    : ""
+                  : adminName
+                  ? adminName
+                  : ""}
+              </h3>
               <HiChevronDown className="text-xl " />
             </div>
           )}
@@ -77,47 +99,82 @@ export default function LoginUser() {
               </Menu.Item>
             ) : (
               <>
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      className={classNames(
-                        active ? "text-black" : "",
-                        "block px-4 py-2 text-sm"
+                {!isAdminLogin ? (
+                  <>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          className={classNames(
+                            active ? "text-black" : "",
+                            "block px-4 py-2 text-sm"
+                          )}
+                          to="/profile"
+                        >
+                          My Profile
+                        </Link>
                       )}
-                      to="/profile"
-                    >
-                      My Profile
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      className={classNames(
-                        active ? "text-black" : "",
-                        "block px-4 py-2 text-sm"
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          className={classNames(
+                            active ? "text-black" : "",
+                            "block px-4 py-2 text-sm"
+                          )}
+                          to="/orders"
+                        >
+                          Orders
+                        </Link>
                       )}
-                      to="/orders"
-                    >
-                      Orders
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      className={classNames(
-                        active ? "text-black" : "",
-                        "flex px-4 py-2 text-sm w-full"
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={classNames(
+                            active ? "text-black" : "",
+                            "flex px-4 py-2 text-sm w-full"
+                          )}
+                          onClick={() => {
+                            handleremoveUser();
+                          }}
+                        >
+                          Log Out
+                        </button>
                       )}
-                      onClick={() => {
-                        handleremoveUser();
-                      }}
-                    >
-                      Log Out
-                    </button>
-                  )}
-                </Menu.Item>
+                    </Menu.Item>
+                  </>
+                ) : (
+                  <>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          className={classNames(
+                            active ? "text-black" : "",
+                            "block px-4 py-2 text-sm"
+                          )}
+                          to="/dashboard"
+                        >
+                          Dashboard
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={classNames(
+                            active ? "text-black" : "",
+                            "flex px-4 py-2 text-sm w-full"
+                          )}
+                          onClick={() => {
+                            handleremoveUser();
+                          }}
+                        >
+                          Log Out
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </>
+                )}
               </>
             )}
           </div>

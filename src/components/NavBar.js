@@ -66,16 +66,18 @@ const NavBar = () => {
             <li className="m-4 font-mono hover:text-pink-500">
               <LoginUser />
             </li>
-            <li className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500">
+            {/* <li className="m-4 hover:underline hover:underline-offset-8 font-mono hover:text-pink-500">
               <Link to="/shop">Become a Seller</Link>
-            </li>
+            </li> */}
             <li className="m-4 font-mono hover:text-pink-500">
               <AboutUser />
             </li>
             <li className="m-4 font-mono hover:text-pink-500">
-              <Link to="/cart" className="flex items-center space-x-2">
-                <span>&#8377;0.00</span>
+              <Link to="/cart" className="relative inline-block">
                 <BsCart3 className="text-xl" />
+                <span className="absolute top-[-11px] right-[-11px] bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-sm">
+                  3
+                </span>
               </Link>
             </li>
           </ul>

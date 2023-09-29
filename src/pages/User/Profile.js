@@ -1,14 +1,17 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState } from "react";
+import Avatar from "react-avatar";
 import { Helmet } from "react-helmet";
 import { BiChevronRight, BiSolidUserAccount } from "react-icons/bi";
 import { BsFillFolderFill, BsFillSuitHeartFill } from "react-icons/bs";
 import { FaUserAlt, FaWallet } from "react-icons/fa";
 import { HiOutlineHeart } from "react-icons/hi";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useAuth0();
+  const user = useSelector((state) => state.user.value);
+  const userName = user?.name;
   const [sidePage, setSidePage] = useState("profile_information");
 
   function handleSidePageClick(value) {
@@ -34,13 +37,14 @@ const Profile = () => {
           <div className="grid md:grid-cols-12 md:gap-2 gap-5 xl:gap-5">
             <div className="hidden md:flex md:col-span-4 lg:col-span-3 col-span-3 flex-col md:space-y-2 space-y-5 xl:space-y-5 h-min">
               <div className="bg-white flex space-x-3 items-center p-3">
-                <img
+                <Avatar name={userName} round={true} size="40"/>
+                {/* <img
                   src="/images/1.jpg"
                   className="rounded-full h-14 w-14 bg-gray-500"
-                />
+                /> */}
                 <div>
                   <p className="text-[13px]">Hello,</p>
-                  <h5 className="font-medium">Ananya Shankadhar</h5>
+                  <h5 className="font-medium">{userName}</h5>
                 </div>
               </div>
               <div className="bg-white flex flex-col">
@@ -75,7 +79,9 @@ const Profile = () => {
                     </h3>
                     <h3
                       className="hover:text-pink-600 hover:bg-pink-50 ps-14 py-3 cursor-pointer"
-                      onClick={() => handleSidePageClick("pan_card_information")}
+                      onClick={() =>
+                        handleSidePageClick("pan_card_information")
+                      }
                     >
                       PAN Card Information
                     </h3>

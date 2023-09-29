@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle, FcShop } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import loginapi from "../services/authentication/loginapi";
+import loginapi from "../../services/authentication/loginapi";
 import toast from "react-hot-toast";
-import { addUser } from "../redux/slice/userSlice";
+import { addUser } from "../../redux/slice/userSlice";
 import {
   Button,
   Dialog,
@@ -13,7 +13,8 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import forgetPassword from "../services/authentication/forgetPassword";
+import forgetPassword from "../../services/authentication/forgetPassword";
+import { addAdmin } from "../../redux/slice/adminSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const Login = () => {
     sports: "",
     newPassword: "",
   });
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -55,15 +55,11 @@ const Login = () => {
       });
       console.log("Data", data);
       toast.success(data?.message);
-      if (data?.success) {
-        setLoading(false);
-        dispatch(addUser(data?.user));
-        navigate("/");
-      }
+      handleClose();
     } catch (error) {
       toast.error("Invalid email and password!");
-      setLoading(false);
       console.log(error);
+      handleClose();
     }
   };
 
@@ -82,15 +78,17 @@ const Login = () => {
         email: inputs.email,
         password: inputs.password,
       });
-      toast.success(data?.message);
-      if (data?.success) {
-        setLoading(false);
+      if (data?.success && data?.user?.role === 1) {
+        toast.success("Admin Login Successfully");
+        dispatch(addAdmin(data?.user));
+        navigate("/");
+      } else if (data?.success && data?.user?.role === 0) {
+        toast.success("User Login Successfully");
         dispatch(addUser(data?.user));
         navigate("/");
       }
     } catch (error) {
       toast.error("Invalid email and password!");
-      setLoading(false);
       console.log(error);
     }
   };
@@ -102,7 +100,6 @@ const Login = () => {
         <div className="bg-white flex justify-start items-center px-[10%]">
           <form
             onSubmit={(e) => {
-              setLoading(true);
               handleSubmit(e);
             }}
             className="flex flex-col w-full space-y-5"
@@ -180,7 +177,6 @@ const Login = () => {
       <Dialog open={open} onClose={handleClose}>
         <form
           onSubmit={(e) => {
-            setLoading(true);
             handleSubmitForget(e);
           }}
         >
@@ -222,10 +218,10 @@ const Login = () => {
             />
           </DialogContent>
           <DialogActions>
-            <button onClick={handleClose}>Cancel</button>
-            <button type="submit" color="primary">
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" color="primary">
               Save
-            </button>
+            </Button>
           </DialogActions>
         </form>
       </Dialog>
